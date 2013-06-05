@@ -1,14 +1,14 @@
 get '/' do
-  # Look in app/views/index.erb
+  @urls = Url.all
   erb :index
 end
 
-get '/:short_url' do
-  @url = Url.find_by_short_url(params[:short_url])
-  redirect "#{@url.full_url}"
+get '/:long_url_hash' do
+  @url = Url.find_by_long_url_hash(params[:long_url_hash])
+  redirect "#{@url.original_url}"
 end
 
-post '/create' do
+post '/your_custom_really_really_long_url' do
   @url = Url.create(params[:url])
   erb :url_details
 end
