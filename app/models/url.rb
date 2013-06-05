@@ -1,6 +1,6 @@
 class Url < ActiveRecord::Base
   validates :original_url, presence: true
-  before_save :generate_long_url_hash
+  before_create :generate_long_url_hash
 
   protected
 

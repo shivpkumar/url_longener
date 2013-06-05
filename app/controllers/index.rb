@@ -1,10 +1,12 @@
 get '/' do
-  @urls = Url.all
+  @urls = Url.all.reverse!
   erb :index
 end
 
 get '/:long_url_hash' do
   @url = Url.find_by_long_url_hash(params[:long_url_hash])
+  @url.click_count += 1
+  @url.save
   redirect "#{@url.original_url}"
 end
 
