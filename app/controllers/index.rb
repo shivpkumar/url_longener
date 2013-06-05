@@ -11,6 +11,7 @@ get '/:long_url_hash' do
 end
 
 post '/your_custom_really_really_long_url' do
-  @url = Url.create(params[:url])
+  @url = Url.find_by_original_url(params[:url][:original_url])
+  @url = Url.create(params[:url]) unless @url
   erb :url_details
 end
