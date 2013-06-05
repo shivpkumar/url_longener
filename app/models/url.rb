@@ -1,11 +1,11 @@
 class Url < ActiveRecord::Base
-  before_save :generate_long_url
-
+  validates :original_url, presence: true
+  before_save :generate_long_url_hash
 
   protected
 
-  def generate_long_url
+  def generate_long_url_hash
     url_string = SecureRandom.hex(50)
-    self.
+    self.long_url_hash = url_string
   end
 end
