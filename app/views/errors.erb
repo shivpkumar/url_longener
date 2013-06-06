@@ -1,0 +1,11 @@
+<h1>Uh oh...</h1>
+<h2>We really wanna make you a long ass URL, but we can't!</h2>
+
+<h3>Here's what's wrong with what you gave us:</h3>
+<ul>
+  <% @errors.each do |error| %>
+  <li><%= error %></li>
+  <% end %>
+</ul>
+
+<h1><a href="/">GO HOME.</a></h1>
