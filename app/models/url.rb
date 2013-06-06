@@ -2,8 +2,7 @@ class Url < ActiveRecord::Base
   validates :original_url, presence: true
   validate :url_must_begin_with_http
   before_create :generate_long_url_hash
-
-
+  belongs_to :user
 
   protected
 

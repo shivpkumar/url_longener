@@ -1,31 +1,36 @@
 enable :sessions
 
-post '/new_user' do
+post '/sign_up' do
   @new_user = User.create(params[:user])
   @user = @new_user if @new_user.id
   session['user'] = @user.id if @user
   if @user
-    redirect :party_page
-  else
     redirect '/'
+  else
+    @errors = @new_user.errors.full_messages
+    erb :errors
   end
 end
 
-post '/login_user' do
+post '/log_in' do
   @user = User.authenticate(params[:user])
   if @user
     session["user"] = @user.id
-    redirect :party_page
+    redirect "/"
   else
-    redirect :unparty_page
+    redirect :errors
   end
 end
 
-get '/login' do
-  erb :login
+get '/log_in' do
+  erb :log_in
 end
 
 get '/logout' do
   session["user"] = nil
   redirect "/"
+end
+
+get '/sign_up' do
+  erb :sign_up
 end

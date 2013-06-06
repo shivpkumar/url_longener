@@ -3,15 +3,17 @@ get '/' do
   erb :index
 end
 
-get '/:long_url_hash' do
+get '/url/:long_url_hash' do
   @url = Url.find_by_long_url_hash(params[:long_url_hash])
   @url.click_count += 1
   @url.save
   redirect "#{@url.original_url}"
 end
 
-post '/your_custom_really_really_long_url' do
+post '/url/your_custom_really_really_long_url' do
   @url = Url.create(params[:url])
+  @url.user_id = session["user"]
+  @url.save
   if @url.valid?
     erb :url_details
   else

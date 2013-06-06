@@ -1,0 +1,10 @@
+<nav>
+    <a id="logo" href="/">URL Longener</a>
+    <% unless logged_in? %>
+    <a id="login" href="/sign_up">Sign Up</a>
+    <a id="login" href="/log_in">Log In</a>
+    <% else %>
+    <a id="login" href="/logout">Log Out</a>
+    <a id="login" href="/user/<%= current_user_id %>">Profile</a>
+    <% end %>
+</nav>
